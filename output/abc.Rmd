@@ -1,0 +1,70 @@
+---
+title: "A Data Story"
+output: html_document
+date: "2023-01-25"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Name: Xinyu Zhu
+
+### Uni: xz3136
+
+### This project is a blog of an exploratory data analysis (EDA) of philosophy texts. 
+
+### The whole dataset is a corpus of more than 360000 sentences taken from 51 texts spanning the history of philosophy. You can read more on https://www.kaggle.com/datasets/kouroshalizadeh/history-of-philosophy?resource=download. 
+
+```{r}
+
+# Create DataFrame
+df <- data.frame(
+  id = c(10,11,12,13,14,15,16,17),
+  name = c('sai','ram','deepika','sahithi','kumar','scott','Don','Lin'),
+  gender = c('M','M',NA,'F','M','M','M','F'),
+  dob = as.Date(c('1990-10-02','1981-3-24','1987-6-14','1985-8-16',
+                  '1995-03-02','1991-6-21','1986-3-24','1990-8-26')),
+  state = c('CA','NY',NA,NA,'DC','DW','AZ','PH'),
+  row.names=c('r1','r2','r3','r4','r5','r6','r7','r8')
+)
+df
+```
+```{r}
+a <- subset(df, subset = rownames(df) == 'r1') 
+a
+```
+```{r}
+b <- subset(df, rownames(df) %in% c('r1','r2','r3'))
+b
+```
+```{r}
+c <- subset(df, gender == 'M')
+c
+```
+```{r}
+d <- subset(df, state %in% c('CA','DC'))
+d
+```
+```{r}
+e <- subset(df, gender == 'M' | state == 'PH')
+e
+```
+```{r}
+f <- subset(df, gender == 'M' & state %in% c('CA','NY'))
+f
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

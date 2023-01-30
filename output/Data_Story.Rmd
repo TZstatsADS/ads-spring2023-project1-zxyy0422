@@ -1,0 +1,144 @@
+---
+title: "A Data Story"
+output: html_document
+date: "2023-01-27"
+---
+
+### Name: Xinyu Zhu
+
+### Uni: xz3136
+
+### This project is a blog of an exploratory data analysis (EDA) of philosophy texts. 
+
+### The whole dataset is a corpus of more than 360000 sentences taken from 51 texts spanning the history of philosophy. You can read more on https://www.kaggle.com/datasets/kouroshalizadeh/history-of-philosophy?resource=download. 
+
+<img src="../figs/2.jpeg" width="800">
+
+```{r setup, include=FALSE, eval=TRUE}
+knitr::opts_chunk$set(eval = TRUE, echo = FALSE, warning=FALSE)
+```
+
+```{r,echo=FALSE,message=FALSE,include=FALSE}
+library(tidyverse)
+library(tibble)
+library(ggplot2)
+library(data.table)
+library(tidyr)
+library(readr)
+library(plotly)
+```
+
+```{r read data, warning=FALSE, message=FALSE,echo=FALSE}
+data <- '../data/philosophy_data.csv'
+data_csv <- read_csv(data)
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide'}
+colnames(data_csv)
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide'}
+unique(data_csv[c("author")])
+```
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+unique(data_csv[c("school")])
+```
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+plato <- subset(data_csv, school == "plato")
+plato
+
+```
+
+```{r}
+rm(a,b,c,d,e,f,p,df)
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+plato_love <- sum(str_detect(plato$tokenized_txt,"love"))
+plato_love
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+plato_death <- sum(str_detect(plato$tokenized_txt,"death"))
+plato_death
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+plato_happy <- sum(str_detect(plato$tokenized_txt,"happy"))
+plato_happy
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+aristotle <- subset(data_csv, school == "aristotle")
+aristotle_love <- sum(str_detect(aristotle$tokenized_txt,"love"))
+aristotle_love
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+aristotle_death <- sum(str_detect(aristotle$tokenized_txt,"death"))
+aristotle_death
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+aristotle_happy <- sum(str_detect(aristotle$tokenized_txt,"happy"))
+aristotle_happy
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+data_csv %>% dplyr::count(school)
+```
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+analytic <- subset(data_csv, school == "analytic")
+capitalism <- subset(data_csv, school == "capitalism")
+communism <- subset(data_csv, school == "communism")
+continental <- subset(data_csv, school == "continental")
+empiricism <- subset(data_csv, school == "empiricism")
+feminism <- subset(data_csv, school == "feminism")
+german_idealism <- subset(data_csv, school == "german_idealism")
+nietzsche <- subset(data_csv, school == "nietzsche")
+phenomenology <- subset(data_csv, school == "phenomenology")
+rationalism <- subset(data_csv, school == "rationalism")
+stoicism <- subset(data_csv, school == "stoicism")
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+analytic_love <- sum(str_detect(analytic$tokenized_txt,"love"))
+analytic_love
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+capitalism_love <- sum(str_detect(capitalism$tokenized_txt,"love"))
+capitalism_love
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+communism_love <- sum(str_detect(communism$tokenized_txt,"love"))
+communism_love
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
