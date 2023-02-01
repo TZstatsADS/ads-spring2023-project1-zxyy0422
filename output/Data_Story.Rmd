@@ -1,5 +1,5 @@
 ---
-title: "A Data Story"
+title: "A Data Story on 'Love' and 'Death'"
 output: html_document
 date: "2023-01-27"
 ---
@@ -8,9 +8,10 @@ date: "2023-01-27"
 
 ### Uni: xz3136
 
-### This project is a blog of an exploratory data analysis (EDA) of philosophy texts. 
+### Basic Information: 
++ This project is a blog of an exploratory data analysis (EDA) of philosophy texts. 
 
-### The whole dataset is a corpus of more than 360000 sentences taken from 51 texts spanning the history of philosophy. You can read more on https://www.kaggle.com/datasets/kouroshalizadeh/history-of-philosophy?resource=download. 
++ The dataset is a corpus of more than 360000 sentences taken from 51 texts spanning the history of philosophy. You can read more on https://www.kaggle.com/datasets/kouroshalizadeh/history-of-philosophy?resource=download. 
 
 <img src="../figs/2.jpeg" width="800">
 
@@ -37,56 +38,35 @@ data_csv <- read_csv(data)
 colnames(data_csv)
 ```
 
-```{r,echo=FALSE,message=FALSE,results='hide'}
-unique(data_csv[c("author")])
+Below is the environment setting of this R notebook.
+
+```{r}
+print(R.version)
 ```
+
+For this data-set, I think it would be good to split it into subsets according to different schools. Since there are too many authors ans there are authors under the same school, so sub-setting by school is better than doing by authors. So i did that and named each subset by the school name. For example, "plato" is a data-frame with data only under the school of Plato. 
+
 ```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
 unique(data_csv[c("school")])
 ```
+
+After doing that, I started to think about what should I do for each sub-dataframe. After a "meditation", I decided to search for key words. When talking about philosophy, there are some words pop up to my mind. They are "love", "power", "desire", "happy", "death", and so on. So I searched each word in every sub-dataframe, and the result was the same as I expected, which is that each single word is being mentioned more than thousands or even ten thousands times. However, I only chose "love" and "death" for future analysis, because I'm most interested in those two, and doing all words for every sub-dataframe would be very time consuming. 
+
 ```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
 plato <- subset(data_csv, school == "plato")
-plato
-
-```
-
-```{r}
-rm(a,b,c,d,e,f,p,df)
 ```
 
 ```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
 plato_love <- sum(str_detect(plato$tokenized_txt,"love"))
-plato_love
-```
-
-```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
 plato_death <- sum(str_detect(plato$tokenized_txt,"death"))
-plato_death
-```
-
-```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
-plato_happy <- sum(str_detect(plato$tokenized_txt,"happy"))
-plato_happy
 ```
 
 ```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
 aristotle <- subset(data_csv, school == "aristotle")
 aristotle_love <- sum(str_detect(aristotle$tokenized_txt,"love"))
-aristotle_love
-```
-
-```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
 aristotle_death <- sum(str_detect(aristotle$tokenized_txt,"death"))
-aristotle_death
 ```
 
-```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
-aristotle_happy <- sum(str_detect(aristotle$tokenized_txt,"happy"))
-aristotle_happy
-```
-
-```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
-data_csv %>% dplyr::count(school)
-```
 ```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
 analytic <- subset(data_csv, school == "analytic")
 capitalism <- subset(data_csv, school == "capitalism")
@@ -103,27 +83,205 @@ stoicism <- subset(data_csv, school == "stoicism")
 
 ```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
 analytic_love <- sum(str_detect(analytic$tokenized_txt,"love"))
-analytic_love
+analytic_death <- sum(str_detect(analytic$tokenized_txt,"death"))
 ```
 
 ```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
 capitalism_love <- sum(str_detect(capitalism$tokenized_txt,"love"))
-capitalism_love
+capitalism_death <- sum(str_detect(capitalism$tokenized_txt,"death"))
 ```
 
 ```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
 communism_love <- sum(str_detect(communism$tokenized_txt,"love"))
-communism_love
+communism_death <- sum(str_detect(communism$tokenized_txt,"death"))
 ```
 
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+continental_love <- sum(str_detect(continental$tokenized_txt,"love"))
+continental_death <- sum(str_detect(continental$tokenized_txt,"death"))
+```
 
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+empiricism_love <- sum(str_detect(empiricism$tokenized_txt,"love"))
+empiricism_death <- sum(str_detect(empiricism$tokenized_txt,"death"))
+```
 
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+feminism_love <- sum(str_detect(feminism$tokenized_txt,"love"))
+feminism_death <- sum(str_detect(feminism$tokenized_txt,"death"))
+```
 
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+german_idealism_love <- sum(str_detect(german_idealism$tokenized_txt,"love"))
+german_idealism_death <- sum(str_detect(german_idealism$tokenized_txt,"death"))
+```
 
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+nietzsche_love <- sum(str_detect(nietzsche$tokenized_txt,"love"))
+nietzsche_death <- sum(str_detect(nietzsche$tokenized_txt,"death"))
+```
 
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+phenomenology_love <- sum(str_detect(phenomenology$tokenized_txt,"love"))
+phenomenology_death <- sum(str_detect(phenomenology$tokenized_txt,"death"))
+```
 
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+rationalism_love <- sum(str_detect(rationalism$tokenized_txt,"love"))
+rationalism_death <- sum(str_detect(rationalism$tokenized_txt,"death"))
+```
 
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+stoicism_love <- sum(str_detect(stoicism$tokenized_txt,"love"))
+stoicism_death <- sum(str_detect(stoicism$tokenized_txt,"death"))
+```
 
+Then, I create a data-frame with four columns: School, num_love (number of times "love" is being mentioned across all the sentences in the corresponding school), num_death (number of times "death" is being mentioned across all the sentences in the corresponding school), and total_sentences (number of total sentences in that school). 
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+School <- c("Plato","Aristotle","Empiricism", "Rationalism", "Analytic", "Continental", "Phenomenology", "German Idealism", "Communism", "Capitalism", "Stoicism", "Nietzsche", "Feminism")
+num_love <- c(plato_love, aristotle_love, empiricism_love, rationalism_love, analytic_love, continental_love, phenomenology_love, german_idealism_love, communism_love, capitalism_love, stoicism_love, nietzsche_love, feminism_love)
+num_death <- c(plato_death, aristotle_death, empiricism_death, rationalism_death, analytic_death, continental_death, phenomenology_death, german_idealism_death, communism_death, capitalism_death, stoicism_death, nietzsche_death, empiricism_death)
+total_sentences <- c(nrow(plato), nrow(aristotle), nrow(empiricism), nrow(rationalism), nrow(analytic), nrow(continental), nrow(phenomenology), nrow(german_idealism), nrow(communism), nrow(capitalism), nrow(stoicism), nrow(nietzsche), nrow(empiricism))
+df <- data.frame(School, num_love, num_death, total_sentences)
+df
+```
+
+However, the data-frame is not indicative enough to look at. Since the number of total sentences in each school is different, only looking at the number of times that "love" or "death" is being mentioned is not precise. So I added three more columns, percent_love (the ratio of num_love and total_sentences), percent_death (the ratio of num_death and total_sentences), and percent_diff (the absolute value of the difference between percent_love and percent_death). Right now, the data is more indicative, but it is still hard to browse the numbers one by one for discoveries. So the next step is to visualize the data.
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+df$percent_love <- 100*(df$num_love / df$total_sentences)
+df$percent_death <- 100*(df$num_death / df$total_sentences)
+df$percent_diff <- abs(df$percent_love - df$percent_death)
+df
+```
+
+First, I did two bar-plots to visualize "love" and "death" separately. I found that authors under the school of "Feminism" mentioned "love" for the highest percent. And authors under the school of "Stoicism" mentioned "death" for the highest percent. 
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+plot1 <- barplot(df$percent_love, names.arg = df$School, border = F, las = 2, cex.names = 0.6, col = "#b3cde0")
+title(main = "Percentage of 'Love' in Each School",
+      ylab = "Percentage")
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+plot2 <- barplot(df$percent_death,names.arg = df$School, border = F, las = 2, cex.names = 0.6, col = "#eec9d2")
+title(main = "Percentage of 'Death' in Each School",
+      ylab = "Percentage")
+```
+
+Then I thought that it would be better if I made another bar-plot with both "love" and "death" side by side for each school. So I made a subset of the previous data-frame by keeping only three columns, Schools, percent_love and percent_death, so that I could do a grouped bar-plot to better visualize the data. By looking at the grouped bar-plot, we could see that "Feminism" has the largest difference of the times mentioning "love" and "death", and the school with the least difference is "Capitalism".
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+new_df <- subset(df, select = c(School, percent_love, percent_death))
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+plot <- new_df %>% 
+  gather(key, val, -School) %>%
+  ggplot(aes(School, val, fill = key)) + 
+  geom_col(position = "dodge") +
+  labs(title = "Percentage of 'Love' and 'Death' for Each School", 
+       x = "School",
+       y = "Percentage")
+plot + theme(axis.text.x = element_text(angle = 90))
+```
+
+In order to be certain, I created another bar-plot to visualize the difference. And also used built-in functions to make sure that "Capitalism" has the least difference. 
+
+I could not generate precise explanations for why feminists mention "love" for the highest percentage, because that would be too subjective. But I guess capitalism focuses much less on "love" and "death" since it is more about economy, demand and property. 
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+plot_diff <- barplot(df$percent_diff, names.arg = df$School, las = 2, cex.names = 0.6, col = "#343d46")
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+df$School[which.max(df$percent_diff)]
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+df$School[which.min(df$percent_diff)]
+```
+
+After looking at only "love" and "death", I started to wonder which words appear most frequently. I still used "Feminism" and "Capitalism" to create two word clouds to visualize. The first word cloud was generated from "Feminism". We can see that except "the" and "and", the most frequent words are "her" and "she" followed by "that" and "for". In contrast, the top six most frequent words for Capitalism word cloud is "the", "and", "which", "for", and "not". None of them is pronoun. This is what I was expecting. Because Feminism indeed focuses on females compared to Capitalism. 
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+library(wordcloud)
+library(wordcloud2)
+library(RColorBrewer)
+library(tm)
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+# Feminism word-cloud
+fem_text <- feminism$tokenized_txt
+fem_docs <- Corpus(VectorSource(fem_text))
+
+fem_docs <- fem_docs %>%
+  tm_map(removeNumbers) %>%
+  tm_map(tolower) %>%
+  tm_map(removePunctuation) %>%
+  tm_map(stripWhitespace)
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+fem_dtm <- TermDocumentMatrix(fem_docs)
+fem_matrix <- as.matrix(fem_dtm)
+fem_words <- sort(rowSums(fem_matrix), decreasing = TRUE)
+fem_df <- data.frame(word = names(fem_words),freq = fem_words)
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+head(fem_df)
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+fem_wc <- wordcloud(words = fem_df$word,
+          freq = fem_df$freq,
+          min.freq = 1,
+          max.words = 200,
+          random.order = FALSE,
+          rot.per = 0.35,
+          colors = brewer.pal(8, "Dark2"))
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+cap_text <- capitalism$tokenized_txt
+cap_docs <- Corpus(VectorSource(cap_text))
+
+cap_docs <- cap_docs %>%
+  tm_map(removeNumbers) %>%
+  tm_map(tolower) %>%
+  tm_map(removePunctuation) %>%
+  tm_map(stripWhitespace)
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+cap_dtm <- TermDocumentMatrix(cap_docs)
+cap_matrix <- as.matrix(cap_dtm)
+cap_words <- sort(rowSums(cap_matrix), decreasing = TRUE)
+cap_df <- data.frame(word = names(cap_words),freq = cap_words)
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+head(cap_df)
+```
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+cap_wc <- wordcloud(words = cap_df$word,
+          freq = cap_df$freq,
+          min.freq = 1,
+          max.words = 200,
+          random.order = FALSE,
+          rot.per = 0.35,
+          colors = brewer.pal(8, "Dark2"))
+```
+
+In conclusion, the results matched what I expected from the data, which is that there were clear differences between the usage of word across different philosophical schools. 
+
+```{r,echo=FALSE,message=FALSE,results='hide',warning = FALSE}
+
+```
 
 
 
